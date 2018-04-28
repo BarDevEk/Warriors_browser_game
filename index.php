@@ -8,7 +8,8 @@
 	“The supreme art of war is to subdue the enemy without fighting.” 
 	― Sun Tzu, The Art of War <br><br>
 
-	<form>
+<!-- sending informations from form to login.php -->
+	<form action="login.php" method="post">
 		
 		Login:<br>
 		<input type="text" name="login"> <br>
