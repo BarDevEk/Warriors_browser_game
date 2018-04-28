@@ -7,7 +7,7 @@
 
 // store login, password to MySQL
 	$db_user ="root";
-	$dv_password= "";
+	$db_password= "";
 
 // stores database name
 	$db_name = "warriors";

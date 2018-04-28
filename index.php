@@ -1,3 +1,16 @@
+<?php 
+	session_start();
+
+	if
+		((isset($_SESSION['loggedIn'])) && ($_SESSION['loggedIn']==true)
+		)
+	{
+	header('Location: game.php');
+	exit();
+	}
+
+ ?>
+
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
@@ -18,6 +31,13 @@
 		<input type="submit" name="Login">
 
 	</form>
+
+	<?php 
+// show 'error' only if 'error ' exist
+		if(isset($_SESSION['error'])){
+			echo $_SESSION['error'];
+		}
+	 ?>
 
 </body>
 </html>
