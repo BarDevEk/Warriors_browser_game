@@ -26,15 +26,12 @@ if ((!isset($_POST['login'])) || (!isset($_POST['password'])))
 	$password = $_POST['password'];
 
 	$login = htmlentities($login,ENT_QUOTES, "UTF-8");
-	$password = htmlentities($password,ENT_QUOTES, "UTF-8");
 
 
 // if the query execution is valid
 	if($result = @$connection->query(
-		sprintf("SELECT * FROM users WHERE user='%s' AND pass='%s'",
-		mysqli_real_escape_string($connection,$login),
-		mysqli_real_escape_string($connection,$password)
-	)))
+		sprintf("SELECT * FROM users WHERE user='%s'",
+		mysqli_real_escape_string($connection,$login))))
 	{
 
 		$numOfUsers = $result->num_rows;
@@ -69,7 +66,7 @@ if ((!isset($_POST['login'])) || (!isset($_POST['password'])))
 
 		}
 
-	}
+	} //if($result = @$connection->query(
 
 	
 

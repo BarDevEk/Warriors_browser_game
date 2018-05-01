@@ -21,6 +21,10 @@
 	“The supreme art of war is to subdue the enemy without fighting.” 
 	― Sun Tzu, The Art of War <br><br>
 
+	<a href="registration.php">Register for free now !</a>
+	<br>
+	<br>
+
 <!-- sending informations from form to login.php -->
 	<form action="login.php" method="post">
 		
