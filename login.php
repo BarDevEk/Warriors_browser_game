@@ -22,10 +22,10 @@ if ((!isset($_POST['login'])) || (!isset($_POST['password'])))
 	else{
 
 // variables login and password take values from inputs from index.php with attr name
-	$login = $_POST['login'];
+	$login    = $_POST['login'];
 	$password = $_POST['password'];
-
-	$login = htmlentities($login,ENT_QUOTES, "UTF-8");
+	
+	$login    = htmlentities($login,ENT_QUOTES, "UTF-8");
 
 
 // if the query execution is valid
@@ -37,33 +37,44 @@ if ((!isset($_POST['login'])) || (!isset($_POST['password'])))
 		$numOfUsers = $result->num_rows;
 		if($numOfUsers>0){
 
-
-			$_SESSION['loggedIn']=true;
 // fetch data from $result and store it in assoc array
 			$row = $result->fetch_assoc();
+
+// verify if inserted password match the password from sql database
+			if (password_verify($password, $row['pass']))
+			{
+
+				$_SESSION['loggedIn']=true;
+
 // create a SESSION variables, which can be used in different php documents
-			$_SESSION['id'] = $row['id'];
-			$_SESSION['user'] = $row['user'];
-			$_SESSION['email'] = $row['email'];
-			$_SESSION['attack'] = $row['attack'];
-			$_SESSION['defense'] = $row['defense'];
-			$_SESSION['health'] = $row['health'];
-			$_SESSION['premiumDays'] = $row['premiumDays'];
+				$_SESSION['id']          = $row['id'];
+				$_SESSION['user']        = $row['user'];
+				$_SESSION['email']       = $row['email'];
+				$_SESSION['attack']      = $row['attack'];
+				$_SESSION['defense']     = $row['defense'];
+				$_SESSION['health']      = $row['health'];
+				$_SESSION['premiumDays'] = $row['premiumDays'];
 
 // When logged in delete 'error'
-			unset($_SESSION['error']);
-			$result->close();
+				unset($_SESSION['error']);
+				$result->close();
 
 // forwarding to game.php
-			header('Location: game.php');
+				header('Location: game.php');
 
+		} //if (password_verify($password, $row['pass']))
+
+		else{
+
+			$_SESSION['error']='<span style="color:red">Invalid login or password.</span> Please try again.';
+			header('Location: index.php');
+		}
 
 		} //if numOfUsers>0
 		else{
 
 			$_SESSION['error']='<span style="color:red">Invalid login or password.</span> Please try again.';
 			header('Location: index.php');
-
 		}
 
 	} //if($result = @$connection->query(
