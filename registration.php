@@ -126,7 +126,7 @@
 // if validation was succesful: 
 				if($sucValidation==true){
 
-					if($connection->query("INSERT into users VALUES (NULL,'$nick','$passwordHash','$email',100,100,100,30)"))
+					if($connection->query("INSERT into users VALUES (NULL,'$nick','$passwordHash','$email',100,100,100,now() + INTERVAL 14 DAY)"))
 					{
 						$_SESSION['registrationSuc']=true;
 						header('Location: welcome.php');
